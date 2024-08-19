@@ -30,8 +30,8 @@ func requestCustomer(writer http.ResponseWriter, r *http.Request) {
 
 func Start(){
 	r:=mux.NewRouter()
-	r.HandleFunc("/hello", hello)
-	r.HandleFunc("/customer", requestCustomer)
+	r.HandleFunc("/hello", hello).Methods(http.MethodPost)
+	r.HandleFunc("/customer", requestCustomer).Methods(http.MethodGet)
 
 	// server starting point
 	http.ListenAndServe(":8080", nil)
