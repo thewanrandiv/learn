@@ -27,12 +27,18 @@ func requestCustomer(writer http.ResponseWriter, r *http.Request) {
 	xml.NewEncoder(writer).Encode(u)
 
 }
+func getCustomer(w http.ResponseWriter,r*http.Request){
+	v:=mux.Vars(r)
+	fmt.Fprintf(w,v["customer_id"])
+
+}
 
 func Start(){
 	r:=mux.NewRouter()
-	r.HandleFunc("/hello", hello).Methods(http.MethodPost)
-	r.HandleFunc("/customer", requestCustomer).Methods(http.MethodGet)
+	r.HandleFunc("/hello", hello).Methods(http.MethodGet)
+	r.HandleFunc("/customer", requestCustomer)
+	r.HandleFunc("/customer/{customer_id:[0-9]+}",getCustomer)
 
 	// server starting point
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", r)
 }
