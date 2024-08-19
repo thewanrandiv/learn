@@ -7,8 +7,7 @@ import (
 
 	"net/http"
 
-	"os"
-	"time"
+
 )
 
 type user struct {
@@ -40,6 +39,6 @@ func requestCustomer(w http.ResponseWriter, r *http.Request) {
 		lname: "Perera",
 	}
 
-	fmt.Fprintf(w,"Response of Customer is" ,u)
+	fmt.Fprintf(w,"Response of Customer is %v" ,u)
 
 }
